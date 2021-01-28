@@ -58,6 +58,9 @@ $app->get('profile', function () {
     return redirect()->route('route.profiles');
 });
 
+$app->get('/settings', ['as' => 'settings', 'uses' => 'ExampleController@getSettings']);
+$app->get('/settings/photo', ['as' => 'settings.photo', 'uses' => 'ExampleController@getSettingsPhoto']);
+
 // ========================== //
 
 // Route Prefixes
