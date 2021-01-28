@@ -81,6 +81,11 @@ $app->get('age-fail', function () {
     return "Not yet mature";
 });
 
+// ========================== //
+
+$app->get('foo/bar', 'ExampleController@fooBar');
+$app->post('user/profile/request', 'ExampleController@userProfile');
+
 // ============================================================ //
 // ================= Contoh route HTTP method ================= //
 
