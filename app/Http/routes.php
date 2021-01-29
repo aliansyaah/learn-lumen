@@ -85,6 +85,7 @@ $app->get('age-fail', function () {
 
 $app->get('foo/bar', 'ExampleController@fooBar');
 $app->post('user/profile/request', 'ExampleController@userProfile');
+$app->get('example-response', 'ExampleController@response');
 
 // ============================================================ //
 // ================= Contoh route HTTP method ================= //

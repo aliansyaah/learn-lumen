@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// Import namespace class Request
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    // Import namespace class Request
+use Illuminate\Http\Response;
 
 
 class ExampleController extends Controller
@@ -70,5 +70,27 @@ class ExampleController extends Controller
         // }else{
         //     return "Failed";
         // }
+    }
+
+    public function response(){
+        $data['status'] = 'Success';
+
+        // Cara 1, dgn memanggil class Response
+        return (new Response($data, 201))
+            ->header('Content-Type', 'application/json');
+
+        // Cara 2, dgn memakai helper response
+        // return response($data, 201);
+        /* Helper response mempunyai 3 parameter
+            1. Content
+            2. HTTP status
+            3. Array headers
+         */
+        
+        // Cara 3, langsung menentukan response type json
+        // return response()->json([
+        //     'message' => 'Failed! Not found!',
+        //     'status' => false
+        // ], 404);
     }
 }
