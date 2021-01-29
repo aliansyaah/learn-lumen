@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;    // Import namespace class Request
 use Illuminate\Http\Response;
-
+use Validator;
 
 class ExampleController extends Controller
 {
@@ -92,5 +92,78 @@ class ExampleController extends Controller
         //     'message' => 'Failed! Not found!',
         //     'status' => false
         // ], 404);
+    }
+
+    public function responsePost(Request $request){
+        // Normal validation
+        // $this->validate($request, [
+        //     'name' => 'required|max:10',
+        //     'email' => 'required|email'
+        // ]);
+
+        // Custom response validation
+        $validasi = Validator::make($request->all(), [
+            'name' => 'required|max:10',
+            'email' => 'required|email'
+        ]);
+
+        if($validasi->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi gagal',
+                'data' => $validasi->errors()
+            ], 401);
+        }
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+
+        $data['status'] = 'success';
+        $data['data'] = [
+            'name' => $name,
+            'email' => $email
+        ];
+        return response($data, 200);
+    }
+
+    // Custom validation messages
+    public function responsePost2(Request $request){
+        // Define validation messages
+        $messages = [
+            'required' => 'Kolom tidak boleh kosong',
+            'email.required' => 'Kolom email tidak boleh kosong',
+            'email.email' => 'Email harus berupa alamat email valid'
+        ];
+
+        // Custom response validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:10',
+            'email' => 'required|email'
+        ], $messages);
+
+        if($validator->fails()){
+            // $messages = $validasi->errors();
+            // echo $messages->first('email');
+            // foreach($messages->all('<li>:message</li>') as $message){
+            //     echo $message;
+            // }
+            // die;
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi gagal',
+                'data' => $validator->errors()
+            ], 401);
+        }
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+
+        $data['status'] = 'success';
+        $data['data'] = [
+            'name' => $name,
+            'email' => $email
+        ];
+        return response($data, 200);
     }
 }

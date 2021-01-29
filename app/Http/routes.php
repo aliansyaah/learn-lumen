@@ -86,6 +86,8 @@ $app->get('age-fail', function () {
 $app->get('foo/bar', 'ExampleController@fooBar');
 $app->post('user/profile/request', 'ExampleController@userProfile');
 $app->get('example-response', 'ExampleController@response');
+$app->post('example-response', 'ExampleController@responsePost');
+$app->post('example-response2', 'ExampleController@responsePost2'); // custom validation msg
 
 // ============================================================ //
 // ================= Contoh route HTTP method ================= //
