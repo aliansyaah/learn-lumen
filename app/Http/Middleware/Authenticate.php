@@ -36,10 +36,25 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        /* Script pengecekan token bisa disimpan di file Middleware->Authenticate ini,
+            atau pada file Providers->AuthServiceProvider.
+            Jika logic pengecekan sudah didefinisikan di sini, pengecekan di AuthServiceProvider
+            tidak terbaca lagi.
+        */
         if ($this->auth->guard($guard)->guest()) {
+            // Jika pengecekan dilakukan di AuthServiceProvider, uncomment script ini.
             // return response('Unauthorized.', 401);
-            if ($request->has('api_token')) {
+            // $res['success'] = false;
+            // $res['message'] = 'Login please!';
+            // return response($res, 401);
+
+            // print_r($request);die;
+
+            // if ($request->header('api_token')) {         // jika api_token disimpan di header
+            if ($request->has('api_token')) {               // jika api_token disimpan di query params
                 $token = $request->input('api_token');
+                // $token = $request->header('api_token');
+
                 $check_token = User::where('api_token', $token)->first();
                 
                 if (!$check_token || $check_token == null) {

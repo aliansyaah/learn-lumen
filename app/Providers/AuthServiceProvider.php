@@ -31,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 
+        // Jika api_token disimpan di query params
         Auth::viaRequest('api', function ($request) {
             if ($request->input('api_token')) {
                 return User::where('api_token', $request->input('api_token'))->first();
@@ -44,5 +45,12 @@ class AuthServiceProvider extends ServiceProvider
            Pada kasus ini kita melakukan query ke dalam table users berdasarkan 
            api_token yg telah kita terima dari middleware. 
          */
+
+        // Jika api_token disimpan di header
+        // Auth::viaRequest('api', function ($request) {
+        //     if ($request->header('api_token')) {
+        //         return User::where('api_token', $request->header('api_token'))->first();
+        //     }
+        // });
     }
 }

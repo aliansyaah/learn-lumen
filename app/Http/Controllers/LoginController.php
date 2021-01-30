@@ -38,6 +38,7 @@ class LoginController extends Controller
             // Compare password dgn password di DB
             if ($hasher->check($password, $login->password)) {
                 $api_token = sha1(time());      // bikin token
+                // $api_token = base64_encode(str_random(40));  // bikin token cara lain
 
                 // token di-update ke tabel user
                 $create_token = User::where('id', $login->id)->update(['api_token' => $api_token]);
