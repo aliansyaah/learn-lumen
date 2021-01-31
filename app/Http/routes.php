@@ -90,6 +90,13 @@ $app->post('example-response', 'ExampleController@responsePost');
 $app->post('example-response2', 'ExampleController@responsePost2'); // custom validation msg
 
 // ============================================================ //
+// ===================== Contoh eloquent ====================== //
+
+$app->get('read-user-profile/{id}', 'ProfileController@read');
+$app->get('read-profile/{phone}', 'ProfileController@readProfile');
+$app->post('create-user-profile', 'ProfileController@create');
+
+// ============================================================ //
 // ================= Contoh route HTTP method ================= //
 
 $app->get('/example-method', function () {

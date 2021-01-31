@@ -36,4 +36,13 @@ class User extends Model implements
     protected $hidden = [
         'password', 'api_token'
     ];
+
+    /**
+    * One to one relationships
+    */
+    // 1 user hanya memiliki 1 profile
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
 }
