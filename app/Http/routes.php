@@ -95,6 +95,8 @@ $app->post('example-response2', 'ExampleController@responsePost2'); // custom va
 $app->get('read-user-profile/{id}', 'ProfileController@read');
 $app->get('read-profile/{phone}', 'ProfileController@readProfile');
 $app->post('create-user-profile', 'ProfileController@create');
+$app->put('update-user-profile/{id}', 'ProfileController@update');
+$app->put('update-user-profile-trans/{id}', 'ProfileController@updateWTransStatus');
 
 // ============================================================ //
 // ================= Contoh route HTTP method ================= //

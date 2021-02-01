@@ -15,7 +15,8 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             // chain method "unsigned" jika tdk akan menerima int dibawah angka 0
-            $table->integer('user_id')->unsigned()->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('phone');
             $table->text('address');
             $table->timestamps();

@@ -14,8 +14,23 @@ class UserSeeder extends Seeder
     {
         // $this->call('UserTableSeeder');
         DB::table('users')->delete();
-        $item = app()->make('App\User');
 
+        // User 1
+        $item = app()->make('App\User');
+        $hasher = app()->make('hash');
+        $password = $hasher->make('password');  // bikin password dgn kata "password"
+        
+        $api_token = sha1(time());
+        $item->fill([
+            'username' => 'Aliansyah',
+            'email' => 'aliansyah@gmail.com',
+            'password' => $password,
+            'api_token' => $api_token
+        ]);
+        $item->save();
+        
+        // User 2
+        $item = app()->make('App\User');
         $hasher = app()->make('hash');
         $password = $hasher->make('password');  // bikin password dgn kata "password"
         
