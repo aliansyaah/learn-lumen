@@ -92,11 +92,15 @@ $app->post('example-response2', 'ExampleController@responsePost2'); // custom va
 // ============================================================ //
 // ===================== Contoh eloquent ====================== //
 
+// One to one
 $app->get('read-user-profile/{id}', 'ProfileController@read');
 $app->get('read-profile/{phone}', 'ProfileController@readProfile');
 $app->post('create-user-profile', 'ProfileController@create');
 $app->put('update-user-profile/{id}', 'ProfileController@update');
 $app->put('update-user-profile-trans/{id}', 'ProfileController@updateWTransStatus');
+
+// One to many
+$app->post('create-post', 'PostController@create');
 
 // ============================================================ //
 // ================= Contoh route HTTP method ================= //

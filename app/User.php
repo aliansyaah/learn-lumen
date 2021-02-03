@@ -40,9 +40,18 @@ class User extends Model implements
     /**
     * One to one relationships
     */
-    // 1 user hanya memiliki 1 profile
+    // 1 user hanya memiliki 1 profile, nama fungsi singular
     public function profile()
     {
         return $this->hasOne('App\Profile');
+    }
+
+    /**
+    * One to many relationships
+    */
+    // 1 user bisa memiliki banyak post, nama fungsi plural
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
     }
 }
