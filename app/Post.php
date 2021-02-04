@@ -18,13 +18,9 @@ class Post extends Model {
     protected $fillable = [
         'user_id','title','body',
     ];
-
-    /**
-    * One to one relationships
-    */
-    // 1 profile dimiliki oleh 1 user
-    // public function user()
-    // {
-    //     return $this->belongsTo('App\User');
-    // }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

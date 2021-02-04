@@ -100,6 +100,7 @@ $app->put('update-user-profile/{id}', 'ProfileController@update');
 $app->put('update-user-profile-trans/{id}', 'ProfileController@updateWTransStatus');
 
 // One to many
+$app->get('read-post/{id}', 'PostController@read');
 $app->post('create-post', 'PostController@create');
 
 // ============================================================ //

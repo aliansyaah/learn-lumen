@@ -21,24 +21,47 @@ class PostController extends Controller
     }
 
     /**
-     * Get one data User & Profile by id
-     * Url : /read-user-profile/{id}
+     * Get list post by user id
+     * Url : /read-post/{id}
      */
     public function read(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
+        // echo '<pre>';
+        // print_r($user->posts()->get());die;
+        // dd($user->posts());     // dd means dump and die
+
         if ($user !== null) {
-            $res['success'] = true;
-            
-            // user has one profile
-            $res['data'] = [
-                'username' => $user->username,
-                'email' => $user->email,
-                'phone' => $user->profile->phone,
-                'address' => $user->profile->address
-            ];
-            
-            return response($res);
+            // Get user data with their posts
+            // $posts = User::where('id', $id)->with('posts')->get()->toArray();
+
+            // Raw / manual query methods
+            // $posts = DB::select("
+            //     select posts.id, posts.user_id, posts.title, posts.body, posts.created_at, 
+            //     posts.updated_at, users.username, users.email
+            //     from posts
+            //     left join users on users.id = posts.user_id
+            //     where posts.user_id = ?
+            // ", [$id]);
+
+            $posts = $user->posts()->get();     // get all user's post
+            // $posts = $user->posts()->get()->toArray();     // get all user's post to array
+            // echo '<pre>';
+            // print_r($posts);die;
+
+            // If result post is not empty
+            if(!$posts->isEmpty()){
+            // if($posts){                  // check array is empty or not
+                $res['success'] = true;
+                $res['data'] = $posts;
+
+                return response($res);
+            }else{
+                $res['success'] = false;
+                $res['message'] = 'Post not found!';
+                
+                return response($res);
+            }                
         }else{
             $res['success'] = false;
             $res['message'] = 'User not found!';
